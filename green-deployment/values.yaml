@@ -1,0 +1,27 @@
+nginx:
+  name: nginx
+  replicas: 3
+
+  deployment:
+    name: nginx-deployment
+
+  image:
+    name: gitea/gitea
+    port: 3000
+  
+  service:
+    name: nginx-service
+    type: NodePort
+    port: 80
+    targetPort: 3000
+    nodePort: 30000
+
+  namespace:
+    name: nginx-ns
+
+  env : Dev
+
+serviceAccount:
+  create: false
+  annotations: {}
+  name: "nginx"
