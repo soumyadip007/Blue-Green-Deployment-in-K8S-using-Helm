@@ -13,7 +13,7 @@ This repository provides a Helm chart and deployment scripts to facilitate Blue 
 
 ## Getting Started:
 
-To get started with Blue Green deployments using Helm, follow the documentation and installation guide available in the repository: [Repository](https://github.com/soumyadip007/Blue-Green-Deployment-in-K8S-using-Helm)
+To get started with Blue Green deployments using Helm, follow the documentation and installation guide available in the [Repository](https://github.com/soumyadip007/Blue-Green-Deployment-in-K8S-using-Helm)
 
 ## Upgrading Deployments
 
