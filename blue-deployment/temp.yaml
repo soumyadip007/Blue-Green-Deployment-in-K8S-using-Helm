@@ -1,0 +1,63 @@
+---
+# Source: nginx/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+
+metadata:
+  name: nginx-ns
+  labels:
+    name: nginx-ns
+---
+# Source: nginx/templates/config.yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+data:
+  Name:  nginx
+  Env: Dev
+---
+# Source: nginx/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: nginx-ns
+spec:
+  type:  NodePort
+  ports:
+    - port:  80
+      targetPort:  3000
+      nodePort:  30000
+  selector:
+    server: nginx
+---
+# Source: nginx/templates/deployment.yaml
+apiVersion : apps/v1
+kind: Deployment
+
+metadata:
+  name: nginx-deployment
+  namespace: nginx-ns
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      server: nginx
+
+  template:
+    metadata:
+      labels:
+        server: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx/nginx
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: production
